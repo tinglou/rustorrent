@@ -1,4 +1,4 @@
-#![feature(test)]
+// #![feature(test)]
 //#[cfg(feature = "benchmark-internals")]
 
 // extern crate test;

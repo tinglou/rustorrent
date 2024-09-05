@@ -111,7 +111,7 @@ pub struct Deserializer<'de> {
     depth: Cell<u16>,
 }
 
-#[doc(hidbn)]
+#[doc(hidden)]
 impl<'de> Deserializer<'de> {
     fn new(input: &'de [u8]) -> Self {
         Deserializer {

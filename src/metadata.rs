@@ -347,7 +347,7 @@ mod tests {
             (
                 $( { $file:tt, $error:expr } ),*
             ) => (
-                &[$(TorrentFail { filename: $file, error: $error },)*];
+                &[$(TorrentFail { filename: $file, error: $error },)*]
             )
         );
 
@@ -425,7 +425,7 @@ mod tests {
             (
                 $( { $file:tt, $assert:expr } ),*
             ) => (
-                &[$(TorrentSuccess { filename: $file, assert: Box::new($assert) },)*];
+                &[$(TorrentSuccess { filename: $file, assert: Box::new($assert) },)*]
             )
         );
 
