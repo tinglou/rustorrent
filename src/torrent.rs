@@ -26,7 +26,7 @@ use crate::{
     piece_collector::{Block, PieceCollector},
     piece_picker::{PieceIndex, PiecePicker},
     pieces::{Pieces, TaskDownload},
-    sha1_pool::Sha1Task,
+    sha1::sha1_pool::Sha1Task,
     spsc::{self, Producer},
     tracker::supervisor::TrackerSupervisor,
     utils::{send_to, Map},

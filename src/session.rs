@@ -21,7 +21,7 @@ use tokio::runtime::Runtime;
 // type PeerAddr = Sender<MessageActor>;
 use crate::torrent::TorrentSupervisor;
 
-use crate::sha1_pool::{Sha1Task, Sha1Workers};
+use crate::sha1::sha1_pool::{Sha1Task, Sha1Workers};
 
 struct SessionInner {
     cmds: SyncReceiver<SessionCommand>,

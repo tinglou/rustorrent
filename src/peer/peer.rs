@@ -142,7 +142,7 @@ impl std::fmt::Debug for PeerExternId {
 
 impl PartialEq for PeerExternId {
     fn eq(&self, other: &PeerExternId) -> bool {
-        crate::sha1_pool::compare_20_bytes(&self.0, &other.0)
+        crate::sha1::sha1_pool::compare_20_bytes(&self.0, &other.0)
     }
 }
 

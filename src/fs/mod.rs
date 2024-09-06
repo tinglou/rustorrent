@@ -19,6 +19,8 @@ use crate::{
 
 pub mod standard_fs;
 #[cfg(target_os = "linux")]
+pub mod io_uring;
+#[cfg(target_os = "linux")]
 pub mod uring_fs;
 
 pub trait FileSystem {

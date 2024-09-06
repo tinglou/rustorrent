@@ -7,7 +7,7 @@ use tokio::runtime::Runtime;
 
 use crate::{
     fs::TorrentCache,
-    io_uring::file::FilesUring,
+    fs::io_uring::file::FilesUring,
     peer::peer::PeerCommand,
     piece_picker::{BlockIndex, PieceIndex},
     torrent::TorrentId,

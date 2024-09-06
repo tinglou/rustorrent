@@ -9,22 +9,22 @@
 <br />
 
 <div align="center">
-  <a href="https://github.com/sebastiencs/rustorrent">
-    <img src="https://img.shields.io/github/last-commit/sebastiencs/rustorrent?style=flat-square"
+  <a href="https://github.com/tinglou/rustorrent">
+    <img src="https://img.shields.io/github/last-commit/tinglou/rustorrent?style=flat-square"
          alt="Last activity" />
   </a>
   <!-- Status -->
-  <a href="https://github.com/sebastiencs/rustorrent">
+  <a href="https://github.com/tinglou/rustorrent">
     <img src="https://img.shields.io/badge/status-in%20development-orange?style=flat-square"
          alt="Status" />
   </a>
   <!-- Coverage -->
-  <a href="https://codecov.io/gh/sebastiencs/rustorrent/tree/master/src">
-    <img src="https://img.shields.io/codecov/c/github/sebastiencs/rustorrent?style=flat-square"
+  <a href="https://codecov.io/gh/tinglou/rustorrent/tree/master/src">
+    <img src="https://img.shields.io/codecov/c/github/tinglou/rustorrent?style=flat-square"
          alt="Coverage" />
   </a>
   <!-- Rust toolchain -->
-  <a href="https://github.com/sebastiencs/rustorrent">
+  <a href="https://github.com/tinglou/rustorrent">
     <img src="https://img.shields.io/badge/rust-stable-blue?style=flat-square"
          alt="rust toolchain" />
   </a>

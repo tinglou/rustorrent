@@ -1,5 +1,7 @@
 use sha1::Digest;
 
+pub mod sha1_pool;
+
 #[cfg(target_arch = "x86_64")]
 mod x86_sha;
 
