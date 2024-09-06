@@ -5,8 +5,7 @@ use futures::{future, StreamExt};
 use hashbrown::HashMap;
 // use kv_log_macro::error;
 use tokio::{
-    net::{TcpListener, TcpStream},
-    runtime::Runtime,
+    net::{TcpListener, TcpStream}, runtime::Runtime
 };
 
 use crate::{
@@ -56,7 +55,7 @@ impl Listener {
     }
 
     pub async fn start(mut self, recv: Receiver<ListenerMessage>) {
-        let mut recv = recv.fuse();
+        let mut recv = Box::pin(recv.fuse());
 
         let accept_v4 = self.tcp.is_some();
         let accept_v6 = self.tcp6.is_some();

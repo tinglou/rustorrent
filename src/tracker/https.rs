@@ -1,7 +1,7 @@
 use async_trait::async_trait;
 use kv_log_macro::{debug, info};
 use serde::de::DeserializeOwned;
-use std::{net::SocketAddr, time::Duration};
+use std::{convert::TryFrom, iter::FromIterator, net::SocketAddr, time::Duration};
 use tokio::net::TcpStream;
 use url::Url;
 
@@ -9,8 +9,10 @@ use std::sync::Arc;
 
 use crate::{torrent::Result, tracker::http::announce_http, utils::ConnectTimeout};
 
-use tokio_rustls::{rustls::ClientConfig, TlsConnector};
-use webpki::DNSNameRef;
+use tokio_rustls::{
+    rustls::{self, pki_types::ServerName},
+    TlsConnector,
+};
 
 use super::{
     connection::TrackerConnection,
@@ -35,10 +37,9 @@ where
     let port = url.port().unwrap_or(443);
     let addr = SocketAddr::from((addr.ip(), port));
 
-    let dnsname = DNSNameRef::try_from_ascii_str(url.domain().unwrap()).unwrap();
-
     let stream = TcpStream::connect_timeout(&addr, Duration::from_secs(5)).await?;
-    let stream = tls.connect(dnsname, stream).await?;
+    let server_name = ServerName::try_from(url.domain().unwrap().to_string()).unwrap();
+    let stream = tls.connect(server_name, stream).await?;
 
     let req = format_request(url, query);
 
@@ -75,11 +76,14 @@ impl HttpsConnection {
         data: Arc<TrackerData>,
         addr: Vec<Arc<SocketAddr>>,
     ) -> Box<dyn TrackerConnection + Send + Sync> {
-        let mut config = ClientConfig::new();
-        config
-            .root_store
-            .add_server_trust_anchors(&webpki_roots::TLS_SERVER_ROOTS);
-        let tls = TlsConnector::from(Arc::new(config));
+        let root_store =
+            rustls::RootCertStore::from_iter(webpki_roots::TLS_SERVER_ROOTS.iter().cloned());
+        let config = rustls::ClientConfig::builder()
+            .with_root_certificates(root_store)
+            .with_no_client_auth();
+        let rc_config = Arc::new(config);
+
+        let tls = TlsConnector::from(rc_config);
 
         Box::new(Self { data, addr, tls })
     }

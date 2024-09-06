@@ -60,7 +60,7 @@ where
     let info_hash = if !de.start_info.is_null() && de.end_info > de.start_info {
         let len = de.end_info as usize - de.start_info as usize;
         let slice = unsafe { std::slice::from_raw_parts(de.start_info, len) };
-        sha1::Sha1::from(&slice[..]).digest().bytes().to_vec()
+        crate::sha1::sha1(&slice[..]).to_vec()
     } else {
         //eprintln!("START={:?} END={:?}", de.start_info, de.end_info);
 

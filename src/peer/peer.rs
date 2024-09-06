@@ -108,6 +108,7 @@ impl PeerExternId {
         let random = rand::thread_rng()
             .sample_iter(&Alphanumeric)
             .take(12)
+            .map(|x| x as char)
             .collect::<String>();
 
         let s = format!("-RR{:04}-{}", VERSION, random);
@@ -273,7 +274,7 @@ impl Peer {
             },
         );
 
-        let mut recv = self.cmd_recv.clone().fuse();
+        let mut recv = Box::pin(self.cmd_recv.clone().fuse());
 
         loop {
             tokio::select! {

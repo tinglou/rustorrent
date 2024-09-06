@@ -447,7 +447,7 @@ impl TorrentSupervisor {
                 // debug!("Piece checked from the pool: {}", valid);
             }
             PeerDiscovered { addrs } => {
-                for addr in addrs.iter().filter(|a| !self.peers_socket.contains(a)) {
+                for addr in addrs.iter().filter(|addr| !self.peers_socket.contains(*addr)) {
                     self.connect_to_peer(*addr, None, None);
                 }
             }

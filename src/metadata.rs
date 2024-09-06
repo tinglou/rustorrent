@@ -147,7 +147,8 @@ pub struct UrlHash(u64);
 
 impl TrackerUrl {
     fn new(url: Url, tier: usize) -> TrackerUrl {
-        let mut hasher = ahash::AHasher::new_with_keys(12345, 4242);
+        // let mut hasher = ahash::AHasher::new_with_keys(12345, 4242);
+        let mut hasher = ahash::AHasher::default();
         url.hash(&mut hasher);
         let hash = UrlHash(hasher.finish());
 

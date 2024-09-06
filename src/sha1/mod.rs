@@ -1,3 +1,5 @@
+use sha1::Digest;
+
 #[cfg(target_arch = "x86_64")]
 mod x86_sha;
 
@@ -16,11 +18,16 @@ pub fn sha1(data: &[u8]) -> [u8; 20] {
     // TODO: Implement for ARM
 
     // Fallback: use the extern crate sha1
-    sha1::Sha1::from(data).digest().bytes()
+    let mut hasher = sha1::Sha1::new();
+    hasher.update(data);
+    let result = hasher.finalize();
+    result.into()
 }
 
 #[cfg(test)]
 mod tests {
+    use sha1::Digest;
+
     use super::sha1;
 
     #[test]
@@ -37,7 +44,7 @@ mod tests {
 
         let mut m = sha1::Sha1::new();
         m.update(&vec);
-        let res2 = m.digest().bytes();
+        let res2: [u8; 20] = m.finalize().into();
 
         assert_eq!(res1, res2);
     }
